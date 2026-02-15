@@ -25,14 +25,13 @@
     <style>
         body { background-color: #FDFBF7; color: #2D3748; -webkit-tap-highlight-color: transparent; font-family: 'Noto Sans TC', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .card-shadow { box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.04); }
+        .card-shadow { box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.05); }
         .btn-active:active { transform: scale(0.96); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* 指南裝飾樣式 */
-        .manual-section { margin-bottom: 32px; }
-        .logic-step { position: relative; padding-bottom: 24px; padding-left: 32px; border-left: 2px dashed #E2E8F0; }
-        .logic-step::before { content: ''; position: absolute; left: -10px; top: 0; width: 18px; height: 18px; border-radius: 50%; background: #F6AD55; border: 4px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .manual-section { margin-bottom: 40px; }
+        .logic-step { position: relative; padding-bottom: 28px; padding-left: 36px; border-left: 2px dashed #E2E8F0; }
+        .logic-step::before { content: ''; position: absolute; left: -11px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #F6AD55; border: 4px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
         .slide-up-enter-active, .slide-up-leave-active { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .slide-up-enter-from, .slide-up-leave-to { transform: translateY(100%); }
@@ -57,24 +56,24 @@
                 </div>
             </div>
             <div class="text-right">
-                <p class="text-[9px] text-wealth-pink font-black uppercase mb-0.5 tracking-widest leading-none">信用卡隔離區</p>
+                <p class="text-[9px] text-wealth-pink font-black uppercase mb-0.5 tracking-widest leading-none">信用卡隔離專款</p>
                 <p class="text-xl font-mono font-black text-wealth-pink leading-none">NT$ {{ formatNumber(data.reservedCC) }}</p>
             </div>
         </header>
 
         <main class="flex-1 max-w-md mx-auto w-full px-4 py-6 space-y-8">
 
-            <!-- 1. 核心指令摘要 -->
+            <!-- 1. 指揮摘要 -->
             <section class="bg-white rounded-[2.5rem] p-7 border border-gray-100 card-shadow space-y-5">
                 <div class="flex justify-between items-center">
-                    <h2 class="text-sm font-black text-gray-700 flex items-center gap-2"><i class="fa-solid fa-compass text-wealth-accent"></i> 指揮摘要與診斷</h2>
+                    <h2 class="text-sm font-black text-gray-700 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-wealth-accent"></i> 核心資產狀態</h2>
                     <button @click="showSetup = true" class="text-[10px] bg-wealth-dark text-white px-4 py-2 rounded-full font-bold shadow-md btn-active">設定中心</button>
                 </div>
 
                 <div class="p-5 rounded-3xl border transition-all duration-500" :class="levelData.style">
                     <div class="flex items-center gap-3 mb-2">
                         <i :class="levelData.icon + ' text-xl'"></i>
-                        <h3 class="text-sm font-black">{{ levelData.name }}階段核心任務</h3>
+                        <h3 class="text-sm font-black">{{ levelData.name }}階段</h3>
                     </div>
                     <p class="text-[11px] font-bold leading-relaxed opacity-90">{{ levelData.advice }}</p>
                 </div>
@@ -88,7 +87,7 @@
                         </div>
                     </div>
                     <div class="bg-orange-50/50 p-4 rounded-3xl border border-orange-100 shadow-inner relative">
-                        <p class="text-[8px] font-black text-wealth-accent uppercase tracking-widest">自由雜支餘額</p>
+                        <p class="text-[8px] font-black text-wealth-accent uppercase tracking-widest">可支配雜支餘額</p>
                         <p class="text-xl font-mono font-black text-wealth-accent tracking-tighter mt-1" :class="stats.remaining < 0 ? 'text-red-500' : ''">
                             NT$ {{ formatNumber(stats.remaining - data.reservedMisc) }}
                         </p>
@@ -106,38 +105,38 @@
                 </button>
             </div>
 
-            <!-- TAB: 指南手冊 (最完整解說版) -->
+            <!-- TAB: 指南手冊 (終極手冊版) -->
             <div v-if="activeTab === 'guide'" class="space-y-6 animate-in slide-in-from-bottom-4">
                 <div class="bg-white rounded-[2.5rem] p-8 border border-gray-100 card-shadow space-y-10">
                     <div class="text-center space-y-2">
-                        <h2 class="text-xl font-black text-wealth-dark uppercase tracking-[0.3em]">指揮官手冊</h2>
-                        <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest leading-none">The Manual of Grit & Prosperity</p>
-                        <div class="w-10 h-1 bg-wealth-accent mx-auto rounded-full mt-2"></div>
+                        <h2 class="text-xl font-black text-wealth-dark uppercase tracking-[0.3em]">指揮官操作手冊</h2>
+                        <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Grit & Prosperity Strategy Manual</p>
+                        <div class="w-10 h-1 bg-wealth-accent mx-auto rounded-full mt-1"></div>
                     </div>
 
                     <!-- 1. 三個分級解說 -->
                     <div class="manual-section">
-                        <h3 class="text-xs font-black text-wealth-accent border-l-4 border-wealth-accent pl-3 uppercase mb-5 tracking-widest">財富分級診斷系統</h3>
+                        <h3 class="text-xs font-black text-wealth-accent border-l-4 border-wealth-accent pl-3 uppercase mb-5 tracking-widest">財富分級診斷定義</h3>
                         <div class="space-y-4">
-                            <div class="p-4 rounded-3xl bg-red-50 border border-red-100">
-                                <p class="text-[11px] font-black text-red-700 uppercase">Level 1：止血生存期</p>
+                            <div class="p-4 rounded-3xl bg-red-50 border border-red-100" :class="stats.level === 1 ? 'ring-2 ring-red-300' : 'opacity-60'">
+                                <p class="text-[11px] font-black text-red-700">Level 1：止血生存期</p>
                                 <p class="text-[10px] text-red-600 leading-relaxed font-bold mt-2">
-                                    診斷條件：存在利率高於 7% 的債務（如卡債、私人信貸）。<br>
-                                    核心目標：奪回財務控制權。在此階段，任何投資的複利都敵不過高利貸的吞噬。系統將引導您進入「止血路徑」，暫停投資，將餘額 100% 用於還款。
+                                    診斷基準：擁有利率高於 7% 的負債。<br>
+                                    戰略意義：此階段清償債務是唯一的最高優先。系統將鎖定投資預算，引導您將所有結餘本全力沖銷債務，早日奪回資產控制權。
                                 </p>
                             </div>
-                            <div class="p-4 rounded-3xl bg-yellow-50 border border-yellow-100">
-                                <p class="text-[11px] font-black text-yellow-700 uppercase">Level 2：護城河建築期</p>
+                            <div class="p-4 rounded-3xl bg-yellow-50 border border-yellow-100" :class="stats.level === 2 ? 'ring-2 ring-yellow-300' : 'opacity-60'">
+                                <p class="text-[11px] font-black text-yellow-700">Level 2：護城河建築期</p>
                                 <p class="text-[10px] text-yellow-600 leading-relaxed font-bold mt-2">
-                                    診斷條件：無高利貸，但緊急預備金（護城河）低於安全目標（建議存滿 6 個月支出）。<br>
-                                    核心目標：建立心理底氣。存款就是您的自由度。此階段應削減不必要的雜支分配，優先將護城河補齊，確保失業或意外時仍能從容生活。
+                                    診斷基準：無高利貸，但緊急預備金低於安全水位。<br>
+                                    戰略意義：存款是您的財務防彈衣。此階段應減少非必要雜支，優先補齊 6 個月支出目標，建立即使失業也能從容生活的底氣。
                                 </p>
                             </div>
-                            <div class="p-4 rounded-3xl bg-green-50 border border-green-100">
-                                <p class="text-[11px] font-black text-green-700 uppercase">Level 3：資產擴張期</p>
+                            <div class="p-4 rounded-3xl bg-green-50 border border-green-100" :class="stats.level === 3 ? 'ring-2 ring-green-300' : 'opacity-60'">
+                                <p class="text-[11px] font-black text-green-700">Level 3：資產增值期</p>
                                 <p class="text-[10px] text-green-600 leading-relaxed font-bold mt-2">
-                                    診斷條件：財務結構穩定，擁有足夠的安全水位。<br>
-                                    核心目標：資產增值與複利應用。全面啟動 532 分配路徑，每月穩定投入 30% 定期定額資產與 20% 專項預存金，享受長期的財富成長。
+                                    診斷基準：財務結構穩定、預備金充足。<br>
+                                    戰略意義：落實 532 分配路徑。穩定進行 30% 定期定額資產投資與 20% 預存袋分配，享受複利帶來的長期增值。
                                 </p>
                             </div>
                         </div>
@@ -145,45 +144,39 @@
 
                     <!-- 2. 兩大路徑說明 -->
                     <div class="manual-section pt-4 border-t border-dashed">
-                        <h3 class="text-xs font-black text-wealth-dark uppercase border-l-4 border-wealth-dark pl-3 mb-5 tracking-widest">分派路徑執行邏輯</h3>
-                        <div class="pl-2 space-y-6">
+                        <h3 class="text-xs font-black text-wealth-dark border-l-4 border-wealth-dark pl-3 uppercase mb-5 tracking-widest">分派路徑執行說明</h3>
+                        <div class="pl-1 space-y-6">
                             <div class="logic-step">
-                                <p class="text-[11px] font-black">路徑 A：有負債模式 (優先清償)</p>
+                                <p class="text-[11px] font-black">路徑 A：有負債模式 (清償路徑)</p>
                                 <p class="text-[10px] text-gray-400 font-bold leading-relaxed mt-1">
-                                    分派順序：固定支出 → 沖銷債務本金 → 必要生活費 → 零雜支。<br>
-                                    執行意義：強行止血，這是與時間的賽跑，確保資金不再無端流失。
+                                    順序：固定支出 → 沖銷負債本金 → 必要生活費 → 零雜支。<br>
+                                    目標：用極簡生活換取最短的還債天數。
                                 </p>
                             </div>
                             <div class="logic-step" style="border-left-color: transparent; padding-bottom: 0;">
-                                <p class="text-[11px] font-black">路徑 B：無負債模式 (資產增值)</p>
+                                <p class="text-[11px] font-black">路徑 B：無負債模式 (增值路徑)</p>
                                 <p class="text-[10px] text-gray-400 font-bold leading-relaxed mt-1">
-                                    分派順序：固定支出 → 資產投資 → 預存分攤 → 生活執行袋 → 雜支結餘。<br>
-                                    執行意義：在花錢前先支付給未來的自己，確保您不需記帳也能精準存到錢。
+                                    順序：固定支出 → 資產投資 → 預存袋撥款 → 生活執行袋 → 雜支結餘。<br>
+                                    目標：在花錢前先支付給未來的自己，落實不需記帳的理財生活。
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3. 功能解析 -->
+                    <!-- 3. 持久化與累積說明 (核心回答) -->
                     <div class="manual-section pt-4 border-t border-dashed">
-                        <h3 class="text-xs font-black text-wealth-blue border-l-4 border-wealth-blue pl-3 uppercase mb-5 tracking-widest">核心模組操作方法</h3>
+                        <h3 class="text-xs font-black text-wealth-blue border-l-4 border-wealth-blue pl-3 uppercase mb-5 tracking-widest">數據持久化與累積說明</h3>
                         <div class="space-y-4">
-                            <div class="bg-gray-50 p-5 rounded-[2rem]">
-                                <p class="text-[11px] font-black flex items-center gap-2 mb-2"><i class="fa-solid fa-credit-card text-wealth-pink"></i> 刷卡同步：專款隔離邏輯</p>
-                                <p class="text-[10px] text-gray-500 leading-relaxed font-bold">
-                                    每當刷卡後（如加油），在執行袋點擊「同步」。這不是消費，是「虛擬現金移動」。錢會被鎖入隔離區，確保帳單日銀行裡已有專款，不會挪用到次月預算。
+                            <div class="bg-blue-50 p-5 rounded-[2rem]">
+                                <p class="text-[11px] font-black flex items-center gap-2 mb-2 text-blue-700"><i class="fa-solid fa-floppy-disk"></i> 如何永久記住我的資料？</p>
+                                <p class="text-[10px] text-blue-600/80 leading-relaxed font-bold">
+                                    本系統採用瀏覽器內建儲存。只要您不清除快取，所有設定、負債、預存袋餘額都會永久保存。您可以將此網頁加入手機首頁，像 App 一樣每天使用。
                                 </p>
                             </div>
-                            <div class="bg-gray-50 p-5 rounded-[2rem]">
-                                <p class="text-[11px] font-black flex items-center gap-2 mb-2"><i class="fa-solid fa-calendar-day text-wealth-blue"></i> 五週現金包：防止透支邏輯</p>
-                                <p class="text-[10px] text-gray-500 leading-relaxed font-bold">
-                                    每月按週領取餐費。領完後這週只需看手中剩多少錢。一旦領出，就不需再手機記帳。多領的第五週是為了對沖天數差，並作為月底結餘來源。
-                                </p>
-                            </div>
-                            <div class="bg-gray-50 p-5 rounded-[2rem]">
-                                <p class="text-[11px] font-black flex items-center gap-2 mb-2"><i class="fa-solid fa-heart text-wealth-pink"></i> 小花挑戰：成就感回饋邏輯</p>
-                                <p class="text-[10px] text-gray-500 leading-relaxed font-bold">
-                                    將月底剩下的雜支或零錢轉入。這是一種「財富剩餘本」，將省下的碎銀變成視覺化進度。點亮一顆心，代表您的底氣增加了一份。
+                            <div class="bg-emerald-50 p-5 rounded-[2rem]">
+                                <p class="text-[11px] font-black flex items-center gap-2 mb-2 text-emerald-700"><i class="fa-solid fa-arrows-rotate"></i> 每個月底要怎麼累積？</p>
+                                <p class="text-[10px] text-emerald-600/80 leading-relaxed font-bold">
+                                    當新的一月到來，請到設定中心點擊「開啟新月份結轉」。系統會保留您的累積資產（預存袋、護城河、本金餘額），但會清空本月的週領狀態，讓您開始新一輪的預算循環。
                                 </p>
                             </div>
                         </div>
@@ -202,9 +195,9 @@
                         <button v-for="(date, i) in currentMonthWeeks" :key="i" @click="toggleWeek(i)" 
                                 class="w-full flex justify-between items-center p-5 rounded-[2.2rem] border-2 transition-all btn-active"
                                 :class="data.paidWeeks.includes(i) ? 'bg-gray-50 border-gray-100 opacity-60' : 'bg-white border-wealth-accent/20 shadow-sm'">
-                            <div class="text-left"><p class="text-[10px] font-mono font-black opacity-30">{{ date }}</p><p class="text-xs font-bold text-slate-700">第 {{ i+1 }} 週執行領取</p></div>
+                            <div class="text-left"><p class="text-[10px] font-mono font-black opacity-30">{{ date }}</p><p class="text-xs font-bold text-slate-700">領取第 {{ i+1 }} 週預算袋</p></div>
                             <span v-if="data.paidWeeks.includes(i)" class="text-[10px] font-bold text-gray-400"><i class="fa-solid fa-check"></i> 已領取</span>
-                            <span v-else class="text-[10px] font-bold text-wealth-accent bg-orange-50 px-3 py-1.5 rounded-full border border-orange-100">領取</span>
+                            <span v-else class="text-[10px] font-bold text-wealth-accent bg-orange-50 px-3 py-1.5 rounded-full border border-orange-100">點擊領取</span>
                         </button>
                     </div>
                 </section>
@@ -216,7 +209,7 @@
                         <button @click="openModal('swipe', bag, getBagLabel(bag))" class="mt-3 w-full py-2.5 text-[10px] bg-wealth-dark text-white rounded-xl font-bold btn-active">刷卡同步</button>
                     </div>
                     <div class="bg-white p-5 rounded-[2.2rem] border-2 border-wealth-accent/20 bg-orange-50/10 card-shadow col-span-2 flex items-center justify-between">
-                        <div><p class="text-[9px] font-black text-wealth-accent uppercase">雜支/結餘袋 (現金來源)</p><p class="text-xl font-mono font-bold text-gray-800">NT$ {{ formatNumber(stats.remaining - data.reservedMisc) }}</p></div>
+                        <div><p class="text-[9px] font-black text-wealth-accent uppercase tracking-widest">雜支袋結餘 (月底剩餘本)</p><p class="text-xl font-mono font-bold text-gray-800">NT$ {{ formatNumber(stats.remaining - data.reservedMisc) }}</p></div>
                         <button @click="openModal('swipeMisc', 'reservedMisc', '雜支消費')" class="py-2.5 px-6 text-[10px] bg-wealth-accent text-white rounded-2xl font-black btn-active">同步刷卡</button>
                     </div>
                 </section>
@@ -235,25 +228,23 @@
                             <div><p class="text-[9px] text-gray-400 font-black">代價生命時間</p><p class="text-4xl font-black text-wealth-accent mt-1">{{ (soulPrice / (data.salary / 160)).toFixed(1) }} <span class="text-xs font-sans opacity-40 uppercase">Hours</span></p></div>
                             <div class="text-right">
                                 <p class="text-[10px] font-black px-4 py-2 rounded-full border shadow-inner" :class="soulPrice <= (stats.remaining - data.reservedMisc) ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'">
-                                    {{ soulPrice <= (stats.remaining - data.reservedMisc) ? '雜支足以支付' : '餘額不足停止' }}
+                                    {{ soulPrice <= (stats.remaining - data.reservedMisc) ? '預算內通行' : '餘額不足停止' }}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section class="bg-white rounded-[2.5rem] p-6 border border-gray-100 card-shadow space-y-4">
-                    <div class="flex justify-between items-end px-1">
-                        <div><p class="text-[10px] font-black text-gray-400">目前階段：{{ stats.currentStage }} / 5</p><h3 class="text-lg font-black text-wealth-dark uppercase tracking-widest">存錢視覺挑戰</h3></div>
-                        <div class="text-right"><p class="text-[10px] text-wealth-pink font-bold">每朵花 ${{ formatNumber(data.challengeConfig.flowerValue) }}</p><span class="text-xs font-mono font-black text-wealth-pink">{{ stats.doneInStage }}/20</span></div>
-                    </div>
-                    <div class="flex flex-wrap gap-4 justify-center">
+                <section class="bg-white rounded-[2.5rem] p-6 border border-gray-100 card-shadow space-y-4 text-center">
+                    <h3 class="text-lg font-black text-wealth-dark uppercase">小花存錢挑戰</h3>
+                    <div class="flex flex-wrap gap-4 justify-center py-4">
                         <button v-for="n in 20" :key="n" @click="toggleFlower(n)" 
                                 class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 btn-active shadow-sm"
                                 :class="isFlowerDoneInStage(n) ? 'bg-wealth-pink text-white scale-110 shadow-lg' : 'bg-gray-100 text-gray-300 hover:bg-rose-50'">
                             <i class="fa-solid fa-heart text-xs"></i>
                         </button>
                     </div>
+                    <p class="text-[10px] text-gray-400 font-bold">月底結餘存入挑戰：每存 ${{ formatNumber(data.challengeConfig.flowerValue) }} 點亮一朵。</p>
                 </section>
             </div>
 
@@ -262,7 +253,7 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div v-for="(fund, index) in data.sinkingFunds" :key="fund.id" @click="openModal('deposit', index, fund.name)"
                          class="bg-white p-4 rounded-[2.2rem] border border-gray-100 card-shadow h-32 flex flex-col justify-between relative overflow-hidden btn-active transition-all group hover:border-wealth-accent">
-                        <div class="flex justify-between items-start z-10"><div class="p-2 bg-gray-50 rounded-xl text-gray-400 group-hover:text-wealth-accent transition-colors"><i :class="'fa-solid fa-' + getIcon(fund.icon)"></i></div><span class="text-[8px] font-black text-wealth-accent bg-orange-50 px-1 rounded">{{ Math.round((fund.current/fund.target)*100) }}%</span></div>
+                        <div class="flex justify-between items-start z-10"><div class="p-2 bg-gray-50 rounded-xl text-gray-400 group-hover:text-wealth-accent transition-colors"><i :class="'fa-solid fa-' + getIcon(fund.icon)"></i></div><span class="text-[8px] font-black text-wealth-accent bg-orange-50 px-1 rounded">{{ Math.round((fund.current/fund.target)*100) || 0 }}%</span></div>
                         <div class="z-10"><p class="text-[9px] font-black text-gray-400 truncate uppercase tracking-widest">{{ fund.name }}</p><p class="text-sm font-mono font-bold text-gray-700">NT$ {{ formatNumber(fund.current) }}</p></div>
                         <div class="absolute bottom-0 left-0 w-full h-1 bg-gray-50"><div class="h-full bg-wealth-accent transition-all duration-1000" :style="{ width: `${Math.min((fund.current/fund.target)*100, 100)}%` }"></div></div>
                     </div>
@@ -277,11 +268,11 @@
                     <div class="space-y-6">
                         <div class="grid grid-cols-2 gap-4 text-center">
                             <div class="bg-white/10 p-4 rounded-3xl border border-white/10 shadow-inner">
-                                <p class="text-[9px] text-blue-100 font-bold uppercase mb-1">總預算目標</p>
+                                <p class="text-[9px] text-blue-100 font-bold uppercase mb-1">總預算目標額</p>
                                 <p class="text-lg font-mono font-bold">NT$ {{ formatNumber(data.travel.total) }}</p>
                             </div>
                             <div class="bg-white/10 p-4 rounded-3xl border border-white/10 shadow-inner">
-                                <p class="text-[9px] text-rose-100 font-bold uppercase mb-1">固定費預扣</p>
+                                <p class="text-[9px] text-rose-100 font-bold uppercase mb-1">機加酒預扣開銷</p>
                                 <p class="text-lg font-mono font-bold">NT$ {{ formatNumber(data.travel.fixed) }}</p>
                             </div>
                         </div>
@@ -309,33 +300,40 @@
         <transition name="slide-up">
             <div v-if="showSetup" class="fixed inset-0 z-[100] flex flex-col justify-end">
                 <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="showSetup = false"></div>
-                <div class="relative bg-white w-full max-w-md mx-auto rounded-t-[3.5rem] p-8 shadow-2xl max-h-[96vh] overflow-y-auto no-scrollbar">
+                <div class="relative bg-white w-full max-w-md mx-auto rounded-t-[3.5rem] p-8 shadow-2xl max-h-[95vh] overflow-y-auto no-scrollbar">
                     <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-8"></div>
-                    <h2 class="text-xl font-black text-center mb-8 uppercase tracking-widest text-gray-800 underline underline-offset-8 decoration-wealth-accent">戰略指令中心</h2>
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-black text-gray-800 uppercase tracking-widest border-l-8 border-wealth-accent pl-3">戰略指令</h2>
+                        <!-- 跨月累積關鍵按鈕 -->
+                        <button @click="monthlyRollover" class="text-[10px] bg-wealth-blue text-white px-4 py-2 rounded-xl font-black shadow-lg btn-active">
+                            <i class="fa-solid fa-arrows-rotate mr-1"></i> 開啟新月份結轉
+                        </button>
+                    </div>
                     
                     <div class="space-y-8 pb-10">
-                        <!-- Step 1: 收入與目標 -->
+                        <!-- Step 1: 收入與預備金 -->
                         <section class="space-y-4">
                             <div class="flex justify-between items-center">
-                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">STEP 1. 核心數據源</p>
-                                <button @click="autoApplyStrategy" class="text-[9px] bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-xl font-black border border-emerald-100 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-wand-magic-sparkles"></i> 建議分配</button>
+                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">STEP 1. 流動資產與目標</p>
+                                <button @click="autoApplyStrategy" class="text-[9px] bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-xl font-black border border-emerald-100 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-wand-magic-sparkles"></i> 建議分配比例</button>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div><label class="text-[9px] font-bold text-gray-400 uppercase">主要薪資</label><input type="number" v-model.number="data.salary" class="w-full border-b py-2 font-mono text-sm bg-transparent outline-none focus:border-wealth-accent"></div>
-                                <div><label class="text-[9px] font-bold text-emerald-500 uppercase">額外獎金</label><input type="number" v-model.number="data.extraIncome" class="w-full border-b py-2 font-mono text-sm bg-transparent outline-none border-emerald-100"></div>
+                                <div><label class="text-[9px] font-bold text-emerald-500 uppercase">額外獎金</label><input type="number" v-model.number="data.extraIncome" class="w-full border-b py-2 font-mono text-sm bg-transparent outline-none border-emerald-100 text-emerald-600"></div>
                                 <div class="col-span-2 bg-yellow-50 p-4 rounded-2xl border border-yellow-100 shadow-inner">
-                                    <label class="text-[9px] font-black text-yellow-600 uppercase">護城河安全目標 / 現有存款</label>
+                                    <label class="text-[9px] font-black text-yellow-600 uppercase">護城河目標水位 / 現有存款</label>
                                     <div class="grid grid-cols-2 gap-4 mt-1">
-                                        <input type="number" v-model.number="data.emergencyFund" class="w-full border-b border-yellow-200 py-1 font-mono text-sm bg-transparent outline-none" placeholder="現有">
-                                        <input type="number" v-model.number="data.moatTarget" class="w-full border-b border-yellow-200 py-1 font-mono text-sm bg-transparent outline-none" placeholder="目標">
+                                        <input type="number" v-model.number="data.emergencyFund" class="w-full border-b border-yellow-200 py-1 font-mono text-sm bg-transparent outline-none text-yellow-700" placeholder="現有">
+                                        <input type="number" v-model.number="data.moatTarget" class="w-full border-b border-yellow-200 py-1 font-mono text-sm bg-transparent outline-none text-yellow-700" placeholder="目標">
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <!-- Step 2: 固定支出細項 (核心需求：房租貸款等) -->
-                        <section class="space-y-4 bg-gray-50 p-5 rounded-[2.5rem] border border-gray-200">
-                            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">STEP 2. 固定支出明細 (月扣)</p>
+                        <!-- Step 2: 固定支出細項 (可編輯) -->
+                        <section class="space-y-4 bg-gray-50 p-5 rounded-[2.5rem] border border-gray-200 shadow-inner">
+                            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">STEP 2. 固定必要支出 (月扣項目)</p>
                             <div class="grid grid-cols-2 gap-x-4 gap-y-4">
                                 <div v-for="(val, key) in data.fixedExpenses" :key="key">
                                     <label class="text-[9px] font-black text-gray-400 uppercase">{{ getFixedLabel(key) }}</label>
@@ -349,35 +347,35 @@
 
                         <!-- Step 3: 負債管理 -->
                         <section class="space-y-4 bg-red-50/50 p-5 rounded-[2.5rem] border border-red-100/50">
-                            <p class="text-[10px] font-black text-red-600 uppercase tracking-widest">STEP 3. 債務止血診斷</p>
+                            <p class="text-[10px] font-black text-red-600 uppercase tracking-widest">STEP 3. 債務止血監測 (高利貸優先)</p>
                             <div class="grid grid-cols-2 gap-3 mb-2">
                                 <input type="text" v-model="newDebt.name" placeholder="名稱" class="text-[11px] p-2.5 border rounded-xl shadow-sm outline-none">
                                 <input type="number" v-model.number="newDebt.balance" placeholder="本金" class="text-[11px] p-2.5 border rounded-xl shadow-sm outline-none">
                             </div>
                             <div class="grid grid-cols-3 gap-3">
                                 <input type="number" v-model.number="newDebt.rate" placeholder="利率%" class="text-[11px] p-2.5 border rounded-xl outline-none">
-                                <input type="number" v-model.number="newDebt.monthly" placeholder="月繳" class="text-[11px] p-2.5 border rounded-xl outline-none">
-                                <button @click="handleAddDebt" class="bg-red-500 text-white rounded-xl text-[11px] font-black btn-active shadow-lg">新增</button>
+                                <input type="number" v-model.number="newDebt.monthly" placeholder="月繳額" class="text-[11px] p-2.5 border rounded-xl outline-none">
+                                <button @click="handleAddDebt" class="bg-red-500 text-white rounded-xl text-[11px] font-black btn-active shadow-lg">新增債務</button>
                             </div>
-                            <div v-for="d in data.debts" :key="d.id" class="flex justify-between items-center bg-white p-3 rounded-2xl border shadow-sm mt-3">
+                            <div v-for="d in data.debts" :key="d.id" class="flex justify-between items-center bg-white p-3 rounded-2xl border shadow-sm mt-2">
                                 <div><p class="text-[10px] font-bold text-gray-700">{{ d.name }} ({{ d.rate }}%)</p></div>
                                 <div class="flex items-center gap-3"><p class="text-[10px] font-mono font-bold text-red-500">-${{ formatNumber(d.monthly) }}</p><i class="fa-solid fa-trash-can text-gray-300 btn-active" @click="removeDebt(d.id)"></i></div>
                             </div>
                         </section>
 
-                        <!-- Step 4: 生活預算分裝 (零基編輯) -->
+                        <!-- Step 4: 零基預算連動 (可編輯) -->
                         <section class="space-y-4">
                             <div class="flex justify-between items-center px-1">
-                                <p class="text-[10px] font-black text-wealth-blue uppercase tracking-widest">STEP 4. 預算分裝與編輯</p>
+                                <p class="text-[10px] font-black text-wealth-blue uppercase tracking-widest">STEP 4. 預算分裝與動態編輯</p>
                                 <div class="text-[10px] font-black" :class="stats.remaining < 0 ? 'text-red-500' : 'text-emerald-500'">餘額剩：NT$ {{ formatNumber(stats.remaining) }}</div>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100">
-                                    <label class="text-[9px] font-bold text-emerald-700 uppercase">定投投資額</label>
+                                    <label class="text-[9px] font-bold text-emerald-700 uppercase">定期定額定投</label>
                                     <input type="number" v-model.number="data.investMonthly" class="w-full border-b border-emerald-200 py-1 font-mono text-sm outline-none bg-transparent font-black">
                                 </div>
                                 <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100">
-                                    <label class="text-[9px] font-bold text-emerald-700 uppercase">預存袋分攤</label>
+                                    <label class="text-[9px] font-bold text-emerald-700 uppercase">每月撥入預存</label>
                                     <input type="number" v-model.number="data.sinkingMonthly" class="w-full border-b border-emerald-200 py-1 font-mono text-sm outline-none bg-transparent font-black">
                                 </div>
                                 <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
@@ -389,22 +387,22 @@
                                     <input type="number" v-model.number="data.miscTarget" class="w-full border-b border-blue-200 py-1 font-mono text-sm outline-none bg-transparent font-black">
                                 </div>
                                 <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
-                                    <label class="text-[9px] font-bold text-blue-700 uppercase">交通預算包</label>
+                                    <label class="text-[9px] font-bold text-blue-700 uppercase">交通加油包</label>
                                     <input type="number" v-model.number="data.transportTotal" class="w-full border-b border-blue-200 py-1 font-mono text-sm outline-none bg-transparent font-black">
                                 </div>
                                 <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
-                                    <label class="text-[9px] font-bold text-blue-700 uppercase">家用預算包</label>
+                                    <label class="text-[9px] font-bold text-blue-700 uppercase">日用家事包</label>
                                     <input type="number" v-model.number="data.householdTotal" class="w-full border-b border-blue-200 py-1 font-mono text-sm outline-none bg-transparent font-black">
                                 </div>
                             </div>
                         </section>
 
-                        <!-- Step 5: 目標設定中心 -->
+                        <!-- Step 5: 專項目標 -->
                         <section class="space-y-4">
-                            <p class="text-[10px] font-black text-gray-400 uppercase px-1">STEP 5. 專項目標金額設定</p>
+                            <p class="text-[10px] font-black text-gray-400 uppercase px-1">STEP 5. 長期目標金額設定</p>
                             <div class="grid grid-cols-2 gap-4 bg-gray-50 p-5 rounded-[2.5rem] border border-gray-200">
                                 <div class="col-span-2 grid grid-cols-3 gap-2 pb-3 border-b mb-2">
-                                    <div><label class="text-[8px] text-gray-500 uppercase">小花金額</label><input type="number" v-model.number="data.challengeConfig.flowerValue" class="w-full border-b py-1 font-mono text-xs outline-none bg-transparent"></div>
+                                    <div><label class="text-[8px] text-gray-500 uppercase">小花單價</label><input type="number" v-model.number="data.challengeConfig.flowerValue" class="w-full border-b py-1 font-mono text-xs outline-none bg-transparent"></div>
                                     <div><label class="text-[8px] text-gray-500 uppercase">旅遊總算</label><input type="number" v-model.number="data.travel.total" class="w-full border-b py-1 font-mono text-xs outline-none bg-transparent"></div>
                                     <div><label class="text-[8px] text-gray-500 uppercase">旅遊天數</label><input type="number" v-model.number="data.travel.days" class="w-full border-b py-1 font-mono text-xs outline-none bg-transparent"></div>
                                 </div>
@@ -418,7 +416,7 @@
                         <button @click="showSetup = false" 
                                 :disabled="stats.remaining < 0"
                                 class="w-full py-5 bg-wealth-dark text-white rounded-[2.5rem] font-black shadow-xl btn-active tracking-[0.3em] uppercase disabled:opacity-50">
-                            {{ stats.remaining < 0 ? '預算透支無法保存' : '同步指令並啟動' }}
+                            {{ stats.remaining < 0 ? '預算透支請重新調整' : '同步指令並啟動戰情室' }}
                         </button>
                     </div>
                 </div>
@@ -436,7 +434,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <button @click="modal.show = false" class="py-4 rounded-2xl font-bold text-gray-400 bg-gray-100 uppercase tracking-widest text-[11px]">取消</button>
-                        <button @click="handleModalSubmit" class="py-4 rounded-2xl font-bold text-white bg-wealth-dark shadow-lg btn-active uppercase text-[11px]">確定</button>
+                        <button @click="handleModalSubmit" class="py-4 rounded-2xl font-bold text-white bg-wealth-dark shadow-lg btn-active uppercase text-[11px]">確定同步</button>
                     </div>
                 </div>
             </div>
@@ -483,17 +481,17 @@
                         { id: 3, name: '出國計畫', target: 100000, current: 0, icon: 'plane' },
                         { id: 4, name: '儲備緩衝', target: 50000, current: 0, icon: 'money-bill-wave' },
                         { id: 5, name: '購物計畫', target: 10000, current: 0, icon: 'bag-shopping' },
-                        { id: 6, name: '社交聚會', target: 10000, current: 0, icon: 'users' },
-                        { id: 7, name: '自定義A', target: 5000, current: 0, icon: 'tag' },
-                        { id: 8, name: '自定義B', target: 5000, current: 0, icon: 'tag' }
+                        { id: 6, name: '社交活動', target: 10000, current: 0, icon: 'users' },
+                        { id: 7, name: '願望達成', target: 30000, current: 0, icon: 'tag' },
+                        { id: 8, name: '避免吃土', target: 5000, current: 0, icon: 'tag' }
                     ],
                     paidWeeks: [], reservedCC: 0, reservedMisc: 0,
                     travel: { total: 50000, fixed: 25000, gifts: 5000, days: 5 }
                 };
 
-                const data = reactive(JSON.parse(localStorage.getItem('asset_commander_data')) || defaultData);
+                const data = reactive(JSON.parse(localStorage.getItem('asset_commander_v42')) || defaultData);
                 const inputWeeklyFood = ref(Math.floor(data.foodTotal / foodWeeks.length));
-                watch(data, (v) => localStorage.setItem('asset_commander_data', JSON.stringify(v)), { deep: true });
+                watch(data, (v) => localStorage.setItem('asset_commander_v42', JSON.stringify(v)), { deep: true });
 
                 const activeTab = ref('budget');
                 const showSetup = ref(false);
@@ -513,8 +511,8 @@
                 const stats = computed(() => {
                     const income = Number(data.salary) + Number(data.extraIncome);
                     const debtMonthly = data.debts.reduce((a, b) => a + Number(b.monthly), 0);
-                    const fixedOnly = Object.values(data.fixedExpenses).reduce((a, b) => a + Number(b), 0);
-                    const totalFixed = fixedOnly + debtMonthly;
+                    const fixedTotal = Object.values(data.fixedExpenses).reduce((a, b) => a + Number(b), 0);
+                    const totalFixed = fixedTotal + debtMonthly;
                     const prioritySavings = Number(data.investMonthly) + Number(data.sinkingMonthly);
                     const livingNecessary = Number(data.foodTotal) + Number(data.transportTotal) + Number(data.householdTotal);
                     const remaining = income - totalFixed - prioritySavings - livingNecessary;
@@ -532,8 +530,8 @@
                 const levelData = computed(() => {
                     const lv = stats.value.level;
                     if (lv === 1) return { name: '止血', advice: '有利率 > 7% 債務。戰略指令：暫停投資，將每月餘額 100% 沖銷債務本金。', icon: 'fa-solid fa-kit-medical', style: 'bg-red-50 border-red-200 text-red-700' };
-                    if (lv === 2) return { name: '護城河', advice: '無高利貸但安全水位不足。指令：削減雜支，優先存滿護城河目標。', icon: 'fa-solid fa-shield-halved', style: 'bg-yellow-50 border-yellow-200 text-yellow-800' };
-                    return { name: '擴張', advice: '財務體質極佳。執行 532 分配：啟動 30% 投資與 20% 預存，發揮複利效應。', icon: 'fa-solid fa-chart-line', style: 'bg-green-50 border-green-200 text-green-800' };
+                    if (lv === 2) return { name: '護城河', advice: '安全水位不足。指令：削減雜支，優先存滿預備金 (NT$ '+formatNumber(data.moatTarget)+')。', icon: 'fa-solid fa-shield-halved', style: 'bg-yellow-50 border-yellow-200 text-yellow-800' };
+                    return { name: '擴張', advice: '財務體質健康。啟動 532 分配路徑：30% 投資與 20% 預存，發揮複利效益。', icon: 'fa-solid fa-chart-line', style: 'bg-green-50 border-green-200 text-green-800' };
                 });
 
                 const autoApplyStrategy = () => {
@@ -549,11 +547,21 @@
                     data.miscTarget = Math.floor(left * 0.2);
                 };
 
+                const monthlyRollover = () => {
+                    // 月度結轉：清空領取勾選、重置信用卡隔離
+                    data.paidWeeks = [];
+                    data.reservedCC = 0;
+                    data.reservedMisc = 0;
+                    // 保留：負債、預存袋餘額、護城河餘額、小花
+                    alert("已完成月度結轉！累積性資產已保留，本月執行袋已重置。");
+                    showSetup.value = false;
+                };
+
                 const updateFoodFromWeekly = () => { data.foodTotal = inputWeeklyFood.value * foodWeeks.length; };
                 const formatNumber = (n) => Math.round(n || 0).toLocaleString();
                 const getFixedLabel = (k) => ({ loan: '學貸/分期', rent: '房租/房貸', phone: '電信/網路', utility: '水電瓦斯', other: '自訂其他' }[k]);
                 const getBagLabel = (k) => ({ householdTotal: '家用', transportTotal: '交通' }[k]);
-                const getIcon = (n) => ({ 'calendar-days': 'calendar-days', 'heart-pulse': 'heart-pulse', 'plane': 'plane', 'money-bill-wave': 'money-bill-wave', 'bag-shopping': 'bag-shopping', 'users': 'users', 'tag': 'tag' }[n] || 'circle');
+                const getIcon = (n) => ({ 'calendar-days': 'calendar-days', 'heart-pulse': 'heart-pulse', 'plane': 'plane', 'money-bill-wave': 'money-bill-wave', 'bag-shopping': 'bag-shopping', 'users': 'users', 'tag': 'tag', 'plus': 'plus' }[n] || 'circle');
 
                 const toggleWeek = (i) => { const idx = data.paidWeeks.indexOf(i); if (idx === -1) data.paidWeeks.push(i); else data.paidWeeks.splice(idx, 1); };
                 const isFlowerDoneInStage = (n) => data.flowers[(stats.value.currentStage - 1) * 20 + (n - 1)];
@@ -571,7 +579,7 @@
                 const handleAddDebt = () => { if(!newDebt.name || !newDebt.balance) return; data.debts.push({ id: Date.now(), name: newDebt.name, balance: Number(newDebt.balance), rate: Number(newDebt.rate), monthly: Number(newDebt.monthly) }); newDebt.name = ''; newDebt.balance = null; newDebt.rate = null; newDebt.monthly = null; };
                 const removeDebt = (id) => data.debts = data.debts.filter(d => d.id !== id);
 
-                return { currentYear, currentMonth, currentMonthWeeks: foodWeeks, data, stats, activeTab, showSetup, levelData, soulPrice, modal, inputValue, inputWeeklyFood, newDebt, tabs, formatNumber, getFixedLabel, getBagLabel, getIcon, toggleWeek, isFlowerDoneInStage, toggleFlower, openModal, handleModalSubmit, handleAddDebt, removeDebt, weeklyFood: computed(()=>Math.floor(data.foodTotal/foodWeeks.length)), autoApplyStrategy, updateFoodFromWeekly, levelName: computed(()=>levelData.value.name) };
+                return { currentYear, currentMonth, currentMonthWeeks: foodWeeks, data, stats, activeTab, showSetup, levelData, soulPrice, modal, inputValue, inputWeeklyFood, newDebt, tabs, formatNumber, getFixedLabel, getBagLabel, getIcon, toggleWeek, isFlowerDoneInStage, toggleFlower, openModal, handleModalSubmit, handleAddDebt, removeDebt, weeklyFood: computed(()=>Math.floor(data.foodTotal/foodWeeks.length)), autoApplyStrategy, updateFoodFromWeekly, levelName: computed(()=>levelData.value.name), monthlyRollover };
             }
         }).mount('#app');
     </script>
